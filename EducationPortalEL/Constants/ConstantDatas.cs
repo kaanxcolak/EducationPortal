@@ -10,6 +10,9 @@ namespace EducationPortalEL.Constants
     {
         public static string STUDENTROLE { get; set; } = "Student";
         public static string ADMNROLE { get; set; } = "Admin";
+        public static string TEACHERROLE { get; set; } = "Teacher";
+        public static string EDITORROLE { get; set; } = "Editor";
+
 
     }
 }
