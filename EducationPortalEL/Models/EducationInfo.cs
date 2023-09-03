@@ -12,7 +12,7 @@ namespace EducationPortalEL.Models
     public class EducationInfo: BaseNumeric
     {
         public int CategoryId { get; set; }
-        public int TrainerTypeId { get; set; }       
+        public string TrainerTypeId { get; set; }       
 
         [Required]
         [StringLength(50, MinimumLength = 2)]
