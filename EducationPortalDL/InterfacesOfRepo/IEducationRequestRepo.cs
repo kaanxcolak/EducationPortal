@@ -10,3 +10,4 @@ namespace EducationPortalDL.InterfacesOfRepo
     public interface IEducationRequestRepo : IRepository<EducationRequest, string>
     {
     }
+    }
