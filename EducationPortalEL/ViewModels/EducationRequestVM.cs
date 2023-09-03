@@ -1,15 +1,13 @@
-﻿using System;
+﻿using EducationPortalEL.Models;
+using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace EducationPortalEL.Models
+namespace EducationPortalEL.ViewModels
 {
-    [Table("EducationRequests")]
-    public class EducationRequest:BaseNonNumeric
+    public class EducationRequestVM : BaseNonNumericVM
     {
         public bool IsEducationRequested { get; set; } //Talep Edildi mi
         
