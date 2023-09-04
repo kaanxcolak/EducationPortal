@@ -1,4 +1,4 @@
-namespace EducationPortalUI.Models
+namespace EducationPortalUI2.Models
 {
     public class ErrorViewModel
     {

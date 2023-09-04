@@ -35,7 +35,7 @@ namespace EducationPortalEL.Models
         [StringLength(2, MinimumLength = 2)]
         public int Age { get; set; }
 
-        public int EducationRequestId { get; set; }
+        public string EducationRequestId { get; set; }
 
         //FK Katılım talebi olacak
         [ForeignKey("EducationRequestId")]
