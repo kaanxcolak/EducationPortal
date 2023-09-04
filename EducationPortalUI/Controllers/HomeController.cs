@@ -1,8 +1,8 @@
-﻿using EducationPortalUI2.Models;
+﻿using EducationPortalUI.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
-namespace EducationPortalUI2.Controllers
+namespace EducationPortalUI.Controllers
 {
     public class HomeController : Controller
     {
