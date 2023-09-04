@@ -32,12 +32,13 @@
   <ItemGroup>
     <Folder Include="Areas\Manager\Data\" />
     <Folder Include="Areas\Manager\Models\" />
-    <Folder Include="Areas\Manager\Views\Admin\" />
-    <Folder Include="Areas\Manager\Views\Shared\" />
     <Folder Include="Areas\Student\Controllers\" />
     <Folder Include="Areas\Student\Data\" />
     <Folder Include="Areas\Student\Models\" />
-    <Folder Include="Areas\Student\Views\" />
+    <Folder Include="Areas\Student\Views\Account\" />
+    <Folder Include="Areas\Student\Views\Home\" />
+    <Folder Include="Areas\Student\Views\Shared\Components\BranchSideBarMenu\" />
+    <Folder Include="Areas\Student\Views\Shared\Components\TopBarMenu\" />
   </ItemGroup>
 
 </Project>
