@@ -1,0 +1,82 @@
+﻿@model EducationInfoVM
+@{
+    ViewData["Title"] = "EducationInfo";
+    Layout = "~/Areas/Manager/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h1>Create Education</h1>
+<div class="container-fluid pt-5">
+    <div class="container">        
+        <div class="row g-5">
+            <div class="col-lg-7">
+                <form asp-controller="Admin" asp-action="EducationInfo" method="post">
+                    <h3 class="display-5 text-uppercase mb-0">Educatıon</h3>
+                    <div class="row g-3">
+                        
+                            <div class="col-12">
+                                <input type="text" class="form-control bg-light border-0 px-4" asp-for="Name"
+                                       placeholder="Name" style="height: 55px;">
+                            </div>
+                            <div class="col-12">
+                                <input type="text" class="form-control bg-light border-0 px-4" asp-for="Kontenjan"
+                                       placeholder="Kontenjan" style="height: 55px;">
+                            </div>
+                            <div class="col-12">
+                                <input type="text" class="form-control bg-light border-0 px-4" asp-for="Time"
+                                       placeholder="Time" style="height: 55px;">
+                            </div>
+                            <div class="col-12">
+                                <input type="text" class="form-control bg-light border-0 px-4" asp-for="PricePerDay"
+                                       placeholder="PricePerDay" style="height: 55px;">
+                            </div>
+                            <div class="col-12">
+                                <input type="text" class="form-control bg-light border-0 px-4" asp-for="Category.Name"
+                                       placeholder="Category Name" style="height: 55px;">
+                            </div>
+                            <div class="col-12">
+                                <textarea type="text" class="form-control bg-light border-0 px-4 py-3" asp-for="Category.Description"
+                                          rows="8" placeholder="Category Description"></textarea>
+                            </div>
+                       
+                    </div>
+                    <h3 class="display-5 text-uppercase mb-0">Traıner </h3>
+                    <div class="row g-3">
+                        <div class="col-12">
+                            <input type="text" class="form-control bg-light border-0 px-4" asp-for="Trainer.Name"
+                                   placeholder="Name" style="height: 55px;">
+                        </div>
+                        <div class="col-12">
+                            <input type="email" class="form-control bg-light border-0 px-4" asp-for="Trainer.Surname"
+                                   placeholder="Surname" style="height: 55px;">
+                        </div>
+                        <div class="col-12">
+                            <input type="text" class="form-control bg-light border-0 px-4" asp-for="Trainer.Phone"
+                                   placeholder="Phone" style="height: 55px;">
+                        </div>
+                        <div class="col-12">
+                            <input type="email" class="form-control bg-light border-0 px-4" asp-for="Trainer.Email"
+                                   placeholder="Email" style="height: 55px;">
+                        </div>
+                        <div class="col-12">
+                            <input type="text" class="form-control bg-light border-0 px-4" asp-for="Trainer.Age"
+                                   placeholder="Age" style="height: 55px;">
+                        </div>
+                        <div class="col-12">
+                            <input type="text" class="form-control bg-light border-0 px-4" asp-for="Trainer.Department"
+                                   placeholder="Department" style="height: 55px;">
+                        </div>
+                        <div class="col-12">
+                            <input type="text" class="form-control bg-light border-0 px-4" asp-for="Trainer.Type"
+                                   placeholder="Type" style="height: 55px;">
+                        </div>
+                    </div>
+
+                    <div class="col-12">
+                        <button type="submit" class="btn btn-primary w-100 py-3">KAYDET</button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

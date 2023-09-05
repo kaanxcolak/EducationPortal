@@ -10,5 +10,7 @@ namespace EducationPortalEL.ViewModels
     public class CategoryVM: BaseNumericVM
     {
         public string Name { get; set; } //online, sınıf içi eğitim, kitap, makale, sunum, mini proje...
+        public string Description { get; set; }
+        public bool Status { get; set; }
     }
 }

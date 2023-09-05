@@ -19,14 +19,15 @@ namespace EducationPortalEL.Models
         public string Name { get; set; }
 
         [Required]
-        [StringLength(2, MinimumLength = 2)]
+        [StringLength(5, MinimumLength = 1)]
         public int Kontenjan { get; set; }
 
         [Required]
-        [StringLength(2, MinimumLength = 2)]
+        [StringLength(50, MinimumLength = 1)]
         public string Time { get; set; }
 
         [Required]
+        [StringLength(50, MinimumLength = 1)]
         public decimal PricePerDay { get; set; }
 
         [ForeignKey("CategoryId")]

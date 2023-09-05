@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EducationPortalDL.Migrations
 {
     [DbContext(typeof(MyContext))]
-    [Migration("20230903204757_initDB")]
-    partial class initDB
+    [Migration("20230905135249_portal")]
+    partial class portal
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -151,7 +151,8 @@ namespace EducationPortalDL.Migrations
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<bool>("IsRemoved")
                         .HasColumnType("bit");
@@ -189,7 +190,7 @@ namespace EducationPortalDL.Migrations
                         .HasColumnType("bit");
 
                     b.Property<int>("Kontenjan")
-                        .HasMaxLength(2)
+                        .HasMaxLength(5)
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
@@ -198,12 +199,13 @@ namespace EducationPortalDL.Migrations
                         .HasColumnType("nvarchar(50)");
 
                     b.Property<decimal>("PricePerDay")
+                        .HasMaxLength(50)
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("Time")
                         .IsRequired()
-                        .HasMaxLength(2)
-                        .HasColumnType("nvarchar(2)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("TrainerTypeId")
                         .IsRequired()

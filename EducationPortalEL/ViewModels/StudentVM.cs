@@ -32,7 +32,7 @@ namespace EducationPortalEL.ViewModels
         public string Email { get; set; }
 
         [Required]
-        [StringLength(2, MinimumLength = 2)]
+        [StringLength(2, MinimumLength = 1)]
         public int Age { get; set; }
 
         public int EducationRequestId { get; set; }

@@ -27,9 +27,9 @@
 				<div class="row align-items-center ">
 					<div class="col-md-12">
 						<div class="card-body">
-							<h4 class="mb-3 f-w-400">Admin Giris Yap</h4>
+							<h4 class="mb-3 f-w-400">Student Giris Yap</h4>
 							<hr>
-							<form asp-controller="Admin" asp-action="AdminLogin" method="post">
+							<form asp-controller="Account" asp-action="Login" method="post">
 								<div class="text-danger" asp-validation-summary="All"></div>
 
 								<div class="text-danger" asp-validation-summary="All"></div>
@@ -51,7 +51,7 @@
 							</form>
 							<hr>
 							<p class="mb-2 text-muted">Sifremi unuttum? <a href="auth-reset-password.html" class="f-w-400">Sifirla</a></p>
-							
+
 							<a asp-controller="Admin" asp-action="Register" class="nav-item nav-link"> Hesabın yoksa kayıt ol! Register</a>
 						</div>
 					</div>

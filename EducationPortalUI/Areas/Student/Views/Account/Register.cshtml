@@ -40,7 +40,7 @@
                 <div class="row align-items-center text-center">
                     <div class="col-md-12">
                         <div class="card-body">
-                            <form asp-action="Register" asp-controller="Account" asp-area="Branch">
+                            <form asp-action="Register" asp-controller="Account" asp-area="Student">
                                 <div asp-validation-summary="All"></div>
                                 <h4 class="f-w-400">KAYIT OL</h4>
                                 <hr>
@@ -71,12 +71,9 @@
                                 </div>
 
 
-
-
-
                                 <button class="btn btn-primary btn-block mb-4">KAYDET</button>
                                 <hr>
-                                <p class="mb-2">Zaten bir hesabınız var mı? <a href="auth-signin.html" class="f-w-400">Giriş Yap</a></p>
+                                <a asp-controller="Account" asp-action="Login" class="hover-btn-new"><span>Zaten bir hesabınız var mı?  Giriş Yap</span></a>
                             </form>
                         </div>
                     </div>

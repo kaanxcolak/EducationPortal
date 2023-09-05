@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace EducationPortalDL.Migrations
 {
     /// <inheritdoc />
-    public partial class initDB : Migration
+    public partial class portal : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -61,7 +61,7 @@ namespace EducationPortalDL.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Status = table.Column<bool>(type: "bit", nullable: false),
                     IsRemoved = table.Column<bool>(type: "bit", nullable: false)
                 },
@@ -265,9 +265,9 @@ namespace EducationPortalDL.Migrations
                     CategoryId = table.Column<int>(type: "int", nullable: false),
                     TrainerTypeId = table.Column<string>(type: "nvarchar(11)", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    Kontenjan = table.Column<int>(type: "int", maxLength: 2, nullable: false),
-                    Time = table.Column<string>(type: "nvarchar(2)", maxLength: 2, nullable: false),
-                    PricePerDay = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    Kontenjan = table.Column<int>(type: "int", maxLength: 5, nullable: false),
+                    Time = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    PricePerDay = table.Column<decimal>(type: "decimal(18,2)", maxLength: 50, nullable: false),
                     IsRemoved = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>

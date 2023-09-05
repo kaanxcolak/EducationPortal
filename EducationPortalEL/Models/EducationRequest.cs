@@ -11,8 +11,10 @@ namespace EducationPortalEL.Models
     [Table("EducationRequests")]
     public class EducationRequest:BaseNonNumeric
     {
+        [Required]
         public bool IsEducationRequested { get; set; } //Talep Edildi mi
-        
+
+        [Required]
         public bool IsEducationCanceled { get; set; } //İptal Edildi mi
     }
 }

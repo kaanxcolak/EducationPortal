@@ -14,6 +14,8 @@ namespace EducationPortalEL.Models
         [Required]
         [StringLength(50, MinimumLength = 2)]
         public string Name { get; set; } //online, sınıf içi eğitim, kitap, makale, sunum, mini proje...
+        [Required]
+        [StringLength(50, MinimumLength = 2)]
         public string Description { get; set; } 
         public bool Status { get; set; }
 
