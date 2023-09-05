@@ -15,7 +15,7 @@ using System.Security.Claims;
 namespace EducationPortalUI.Areas.Student.Controllers;
 
 [Area("Student")]
-[Route("account/[Controller]/[Action]/{id?}")]
+[Route("Account/[Action]/{id?}")]
 public class AccountController : Controller
 {
 	private readonly UserManager<AppUser> _userManager;
