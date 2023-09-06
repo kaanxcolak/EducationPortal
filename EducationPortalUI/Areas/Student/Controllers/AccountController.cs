@@ -225,9 +225,6 @@ public class AccountController : Controller
             return View(new List<StudentVM>());
         }
     }
-
-
-
 	
 
     [Authorize]

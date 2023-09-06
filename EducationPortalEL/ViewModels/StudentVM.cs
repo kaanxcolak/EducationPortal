@@ -38,6 +38,9 @@ namespace EducationPortalEL.ViewModels
         public int EducationRequestId { get; set; }
         
         public EducationRequest EducationRequest { get; set; }
+        public string EducationInfoId { get; set; }
+        public virtual EducationInfo EducationInfo { get; set; }
+
 
 
 

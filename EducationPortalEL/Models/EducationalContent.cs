@@ -22,5 +22,6 @@ namespace EducationPortalEL.Models
         [Required]  
         public string FileWay { get; set; } 
 
+
     }
 }

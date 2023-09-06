@@ -292,6 +292,10 @@ namespace EducationPortalDL.Migrations
                         .HasColumnType("datetime2")
                         .HasColumnOrder(2);
 
+                    b.Property<string>("EducationInfoId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(11)");
+
                     b.Property<string>("EducationRequestId")
                         .IsRequired()
                         .HasColumnType("nvarchar(11)");
@@ -325,6 +329,8 @@ namespace EducationPortalDL.Migrations
                         .HasColumnType("nvarchar(11)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("EducationInfoId");
 
                     b.HasIndex("EducationRequestId");
 
@@ -523,11 +529,19 @@ namespace EducationPortalDL.Migrations
 
             modelBuilder.Entity("EducationPortalEL.Models.Student", b =>
                 {
+                    b.HasOne("EducationPortalEL.Models.EducationInfo", "EducationInfo")
+                        .WithMany()
+                        .HasForeignKey("EducationInfoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("EducationPortalEL.Models.EducationRequest", "EducationRequest")
                         .WithMany()
                         .HasForeignKey("EducationRequestId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("EducationInfo");
 
                     b.Navigation("EducationRequest");
                 });

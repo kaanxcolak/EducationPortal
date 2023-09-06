@@ -229,32 +229,6 @@ namespace EducationPortalDL.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Students",
-                columns: table => new
-                {
-                    Id = table.Column<string>(type: "nvarchar(11)", maxLength: 11, nullable: false),
-                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    Surname = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    Phone = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false),
-                    TcNo = table.Column<string>(type: "nvarchar(11)", maxLength: 11, nullable: false),
-                    Email = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    Age = table.Column<int>(type: "int", nullable: false),
-                    EducationRequestId = table.Column<string>(type: "nvarchar(11)", nullable: false),
-                    IsRemoved = table.Column<bool>(type: "bit", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Students", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Students_EducationRequests_EducationRequestId",
-                        column: x => x.EducationRequestId,
-                        principalTable: "EducationRequests",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "EducationInfos",
                 columns: table => new
                 {
@@ -279,15 +253,42 @@ namespace EducationPortalDL.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_EducationInfos_Students_StudentId",
-                        column: x => x.StudentId,
-                        principalTable: "Students",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
                         name: "FK_EducationInfos_TrainerInfos_TrainerTypeId",
                         column: x => x.TrainerTypeId,
                         principalTable: "TrainerInfos",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Students",
+                columns: table => new
+                {
+                    Id = table.Column<string>(type: "nvarchar(11)", maxLength: 11, nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Surname = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Phone = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false),
+                    TcNo = table.Column<string>(type: "nvarchar(11)", maxLength: 11, nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Age = table.Column<int>(type: "int", nullable: false),
+                    EducationRequestId = table.Column<string>(type: "nvarchar(11)", nullable: false),
+                    EducationInfoId = table.Column<string>(type: "nvarchar(11)", nullable: false),
+                    IsRemoved = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Students", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Students_EducationInfos_EducationInfoId",
+                        column: x => x.EducationInfoId,
+                        principalTable: "EducationInfos",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Students_EducationRequests_EducationRequestId",
+                        column: x => x.EducationRequestId,
+                        principalTable: "EducationRequests",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -347,14 +348,35 @@ namespace EducationPortalDL.Migrations
                 column: "TrainerTypeId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Students_EducationInfoId",
+                table: "Students",
+                column: "EducationInfoId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Students_EducationRequestId",
                 table: "Students",
                 column: "EducationRequestId");
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_EducationInfos_Students_StudentId",
+                table: "EducationInfos",
+                column: "StudentId",
+                principalTable: "Students",
+                principalColumn: "Id",
+                onDelete: ReferentialAction.Cascade);
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropForeignKey(
+                name: "FK_EducationInfos_Categories_CategoryId",
+                table: "EducationInfos");
+
+            migrationBuilder.DropForeignKey(
+                name: "FK_EducationInfos_Students_StudentId",
+                table: "EducationInfos");
+
             migrationBuilder.DropTable(
                 name: "AspNetRoleClaims");
 
@@ -374,9 +396,6 @@ namespace EducationPortalDL.Migrations
                 name: "EducationalContents");
 
             migrationBuilder.DropTable(
-                name: "EducationInfos");
-
-            migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
@@ -389,10 +408,13 @@ namespace EducationPortalDL.Migrations
                 name: "Students");
 
             migrationBuilder.DropTable(
-                name: "TrainerInfos");
+                name: "EducationInfos");
 
             migrationBuilder.DropTable(
                 name: "EducationRequests");
+
+            migrationBuilder.DropTable(
+                name: "TrainerInfos");
         }
     }
 }

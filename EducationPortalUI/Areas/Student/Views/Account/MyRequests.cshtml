@@ -1,0 +1,71 @@
+﻿@model List<StudentVM>
+@{
+    ViewData["Title"] = "MyRequests";
+    Layout = "~/Areas/Student/Views/Shared/_LayoutStudent.cshtml";
+}
+
+<h1>My Requests</h1>
+<div class="col-12 col-md-10 offset-1 offset-1">
+    <div class="text-danger" asp-validation-summary="All"></div>
+
+    <table style="width:100%; border:solid" class="table table-hover">
+        <tr>
+            <th style="border:solid; color:blue">STUDENT</th>
+            <th style="border:solid; color:blue">TRAINER</th>
+            <th style="border:solid; color:blue">EDUCATION</th>
+            <th style="border:solid; color:blue">CATEGORY</th>
+            <th style="border:solid; color:blue">TRAINER TYPE</th>
+            <th style="border:solid; color:blue">KONTENJAN</th>
+            <th style="border:solid; color:blue">PRICE PER DAY</th>
+            <th style="border:solid; color:blue">TIME</th>
+            <th style="border:solid; color:blue">REQUEST</th>
+            <th style="border:solid; color:blue">CANCEL</th>
+
+
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <th style="border:solid; color:black">@item.Name <br />@item.Surname - <br />@item.TcNo</th>
+                <th style="border:solid; color:black">@item.EducationInfo.Trainer.Name<br />@item.EducationInfo.Trainer.Surname <br /></th>
+                <th style="border:solid; color:black">@item.EducationInfo.Category.Name</th>
+                <th style="border:solid; color:black">@item.EducationInfo.Trainer.Type</th>
+                <th style="border:solid; color:black">@item.EducationInfo.Kontenjan</th>
+                <th style="border:solid; color:black">@item.EducationInfo.PricePerDay</th>
+                <th style="border:solid; color:black">@item.EducationInfo.Time</th>
+                <th style="border:solid; color:black">@item.EducationInfo.Student.EducationRequest.IsEducationRequested</th>
+                <th style="border:solid; color:black">@item.EducationInfo.Student.EducationRequest.IsEducationCanceled</th>
+            </tr>
+        }
+        <br />
+    </table>
+    <br />
+    @* <div class="row">
+    <div class="text-center">
+    <ul class="pagination">
+
+    <li>
+    <a class="page-link btn @previousDisabled" href="@Url.ActionLink("AllEducations","Admin",new{area="Manager",pageindex=Model.PageIndex-1})">
+    &laquo;
+    </a>
+    </li>
+
+    @for (int i = 1; i <= Model.TotalPages; i++)
+    {
+    <li>
+    <a class="page-link" href="@Url.ActionLink("AllEducations","Admin",new{area="Manager",pageindex=i})">
+    @i
+    </a>
+    </li>
+    }
+
+    <li>
+    <a class="page-link btn @nextDisabled" href="@Url.ActionLink("AllEducations","Admin",new{area="Manager",pageindex=Model.PageIndex+1})">
+    &raquo;
+    </a>
+    </li>
+    </ul>
+    </div>
+    </div>*@
+</div>
