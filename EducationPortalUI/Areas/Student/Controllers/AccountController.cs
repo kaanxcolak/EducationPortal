@@ -17,6 +17,7 @@ namespace EducationPortalUI.Areas.Student.Controllers;
 
 [Area("Student")]
 [Route("Account/[Action]/{id?}")]
+//[Authorize(Roles = "Student", AuthenticationSchemes = AuthenticationSchemes.StudentArea)]
 public class AccountController : Controller
 {
 	private readonly UserManager<AppUser> _userManager;
@@ -224,90 +225,6 @@ public class AccountController : Controller
             return View(new List<StudentVM>());
         }
     }
-
-    [HttpGet]
-	public IActionResult EducationInfo()
-	{
-		return View();
-	}
-
-	
-	[HttpPost]
-	public IActionResult EducationInfo(EducationInfoVM model)
-	{
-		try
-		{
-			if (!ModelState.IsValid)
-			{
-				ModelState.AddModelError("", "Bilgileri düzgün giriniz");
-				return View(model);
-			}
-
-			var sameEducationInfo = _educationInfoManager.GetByConditions(x => x.CategoryId == model.CategoryId && x.CreatedDate == model.CreatedDate).Data;
-
-
-			if (sameEducationInfo != null)
-			{
-				ModelState.AddModelError("", "Eğitim tanımlanması var!");
-				return View(model);
-			}
-
-			// eğitim tanımlanmış mı?
-			//yoksa ekle
-			var education = _userManager.FindByEmailAsync(model.Trainer.Email).Result;
-
-			if (education == null)
-			{
-				AppUser user = new AppUser()
-				{
-					UserName = model.Trainer.TcNo,
-					Name = model.Trainer.Name,
-					Surname = model.Trainer.Surname,
-					TcNo = model.Trainer.TcNo,
-					PhoneNumber = model.Trainer.Phone,
-					Email = model.Trainer.Email,
-					EmailConfirmed = true,
-				};
-
-				var result = _userManager.CreateAsync(user, model.Trainer.TcNo).Result;
-				if (result.Succeeded)
-				{
-					var roleResult = _userManager.AddToRoleAsync(user, "Trainer").Result;
-				}
-			}
-			EducationInfoVM educationInfo = new EducationInfoVM()
-			{
-				TrainerTypeId = model.TrainerTypeId, // giriş yapan trainer
-				Name = model.Name,
-				Kontenjan = model.Kontenjan,
-				Time = model.Time,
-				PricePerDay = model.PricePerDay,
-				CreatedDate = model.CreatedDate,
-				IsRemoved = model.IsRemoved,
-
-			};
-
-			if (_educationInfoManager.Add(_mapper.Map<EducationInfoVM>(educationInfo)).IsSuccess)
-			{
-				TempData["AppointmentSuccessMsg"] = "Kayıt başarılı!";
-				return RedirectToAction("EducationInfo", "admin");
-
-			}
-			else
-			{
-				ModelState.AddModelError("", "Eğitim oluştu! Ancak rolü atanamadı! Sistem yöneticisine ulaşarak rol ataması yapılmalıdır!");
-				return View(model);
-
-			}
-		}
-
-		catch (Exception ex)
-		{
-			return View(model);
-		}
-
-	}
-
 
 
 

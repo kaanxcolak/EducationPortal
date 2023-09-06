@@ -17,7 +17,7 @@ namespace EducationPortalUI.Areas.Manager.Controllers
 {
     [Area("Manager")]
     [Route("admin/[Action]/{id?}")]
-    [Authorize(Roles = "Student", AuthenticationSchemes = AuthenticationSchemes.StudentArea)]
+    //[Authorize(Roles = "Manager", AuthenticationSchemes = AuthenticationSchemes.ManagerArea)]
     public class AdminController:Controller
     {
         private readonly UserManager<AppUser> _userManager;      
@@ -288,25 +288,7 @@ namespace EducationPortalUI.Areas.Manager.Controllers
                 ModelState.AddModelError("", "Beklenmedik bir hata olustu!" + ex.Message);
                 return View(new List<EducationInfoVM>());
             }
-        }
-
-        [HttpGet]
-        public IActionResult StudentRequests(int pageindex = 1)
-        {
-            try
-            {
-                var data = _studentManager.GetAll().Data;
-
-                var students = PaginatedList<StudentVM>.Create(data.ToList(), pageindex, 5);
-                return View(students);
-            }
-            catch (Exception ex)
-            {
-                ModelState.AddModelError("", "Beklenmedik bir hata olustu!" + ex.Message);
-                return View(new List<StudentVM>());
-            }
-        }
-
+        }       
 
 
 

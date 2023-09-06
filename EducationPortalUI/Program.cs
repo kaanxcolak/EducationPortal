@@ -6,6 +6,8 @@ using EducationPortalDL.ImplementationsOfRepo;
 using EducationPortalDL.InterfacesOfRepo;
 using EducationPortalEL.IdentityModels;
 using EducationPortalEL.Maps;
+using EducationPortalUI.DefaultData;
+using KargomentoUI.DefaultData;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -61,6 +63,21 @@ builder.Services.AddScoped<IStudentManager, StudentManager>();
 builder.Services.AddScoped<ITrainerInfoRepo, TrainerInfoRepo>();
 builder.Services.AddScoped<ITrainerInfoManager, TrainerInfoManager>();
 
+//var authentication = builder.Services.AddAuthentication(o =>
+//{
+//    o.DefaultScheme = AuthenticationSchemes.StudentArea;
+//});
+//authentication.AddCookie(AuthenticationSchemes.StudentArea, o =>
+//{
+//    o.LoginPath = new PathString("/account/login/");
+//    o.AccessDeniedPath = new PathString("/account/login");
+//});
+//authentication.AddCookie(AuthenticationSchemes.ManagerArea, o =>
+//{
+//    o.LoginPath = new PathString("/admin/login/");
+//    o.AccessDeniedPath = new PathString("/admin/login");
+//});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -83,24 +100,16 @@ using (var scope = app.Services.CreateScope())
     //Resolve ASP .NET Core Identity with DI help
     var userManager = (UserManager<AppUser>?)scope.ServiceProvider.GetService(typeof(UserManager<AppUser>));
     var roleManager = (RoleManager<AppRole>?)scope.ServiceProvider.GetService(typeof(RoleManager<AppRole>));
-    // do you things here
+    
 
     var CategoryManager = (ICategoryManager?)scope.ServiceProvider.GetService(typeof(ICategoryManager));
+    var EducationInfoManager = (IEducationInfoManager?)scope.ServiceProvider.GetService(typeof(IEducationInfoManager));
+    var StudentManager = (IStudentManager?)scope.ServiceProvider.GetService(typeof(IStudentManager));
 
-    //Devamı var!!!!!!
+    
 
-    //DataDefault dataDefault = new DataDefault();
-
-    //dataDefault.CheckAndCreateRoles(roleManager);
-
-    //dataDefault.CreateAllCargoStatus(cargoStatusManager);
-
-    //dataDefault.CreateAllCities(cityManager);
-
-    //dataDefault.CreateAllDistricts(districtManager);
-
-    // dataDefault.CreateAFewEmployee(userManager,roleManager,employeeBranchManager);
-
+    DataDefault dataDefault = new DataDefault();
+    dataDefault.CheckAndCreateRoles(roleManager);
 }
 
 app.Run();

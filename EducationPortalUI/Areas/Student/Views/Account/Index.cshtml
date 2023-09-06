@@ -19,9 +19,9 @@
             <th style="border:solid; color:blue">TRAINER</th>
             <th style="border:solid; color:blue">EDUCATION</th>
             <th style="border:solid; color:blue">CATEGORY</th>
-            <th style="border:solid; color:blue">TRAINERTYPE</th>
+            <th style="border:solid; color:blue">TRAINER TYPE</th>
             <th style="border:solid; color:blue">KONTENJAN</th>
-            <th style="border:solid; color:blue">PRICEPERDAY</th>
+            <th style="border:solid; color:blue">PRICE PER DAY</th>
             <th style="border:solid; color:blue">TIME</th>
             <th style="border:solid; color:blue">STATUS</th>
         </tr>
@@ -46,36 +46,7 @@
     </table>
 
     <br />
-    @*<div class="row">
-        <div class="text-center">
-            <ul class="pagination">
-
-                <li>
-                    <a class="page-link btn @previousDisabled" href="@Url.ActionLink("Index","Account",new{area="Student",pageindex=Model.PageIndex-1})">
-                        &laquo;
-                    </a>
-                </li>
-
-                @for (int i = 1; i <= Model.TotalPages; i++)
-                {
-                    <li>
-                        <a class="page-link" href="@Url.ActionLink("Index","Account",new{area="Student",pageindex=i})">
-                            @i
-                        </a>
-                    </li>
-                }
-
-                <li>
-                    <a class="page-link btn @nextDisabled" href="@Url.ActionLink("Index","Account",new{area="Student",pageindex=Model.PageIndex+1})">
-                        &raquo;
-                    </a>
-                </li>
-            </ul>
-
-
-
-        </div>
-    </div>*@
+    
 </div>
 
 
