@@ -13,6 +13,7 @@ namespace EducationPortalEL.Models
     {
         public string CategoryId { get; set; }
         public string TrainerTypeId { get; set; }       
+        public string StudentId { get; set; }       
 
         [Required]
         [StringLength(50, MinimumLength = 2)]
@@ -33,6 +34,9 @@ namespace EducationPortalEL.Models
 
         [ForeignKey("TrainerTypeId")]
         public virtual TrainerInfo Trainer { get; set; }
+
+        [ForeignKey("StudentId")]
+        public virtual Student Student { get; set; }
 
 
     }

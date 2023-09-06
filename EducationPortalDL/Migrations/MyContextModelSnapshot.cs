@@ -194,6 +194,10 @@ namespace EducationPortalDL.Migrations
                     b.Property<decimal>("PricePerDay")
                         .HasColumnType("decimal(18,2)");
 
+                    b.Property<string>("StudentId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(11)");
+
                     b.Property<string>("Time")
                         .IsRequired()
                         .HasMaxLength(50)
@@ -206,6 +210,8 @@ namespace EducationPortalDL.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("CategoryId");
+
+                    b.HasIndex("StudentId");
 
                     b.HasIndex("TrainerTypeId");
 
@@ -496,6 +502,12 @@ namespace EducationPortalDL.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("EducationPortalEL.Models.Student", "Student")
+                        .WithMany()
+                        .HasForeignKey("StudentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("EducationPortalEL.Models.TrainerInfo", "Trainer")
                         .WithMany()
                         .HasForeignKey("TrainerTypeId")
@@ -503,6 +515,8 @@ namespace EducationPortalDL.Migrations
                         .IsRequired();
 
                     b.Navigation("Category");
+
+                    b.Navigation("Student");
 
                     b.Navigation("Trainer");
                 });

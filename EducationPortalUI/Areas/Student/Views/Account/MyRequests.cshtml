@@ -1,18 +1,19 @@
-﻿@model List<EducationInfoVM>
-@*@{
+﻿@model PaginatedList<EducationInfoVM>
+@{
     string previousDisabled = Model.PreviousPage ? "" : "disabled";
     string nextDisabled = Model.NextPage ? "" : "disabled";
-}*@
-
+}
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "MyRequests";
     Layout = "~/Areas/Student/Views/Shared/_LayoutStudent.cshtml";
 }
 
-<h1>Student Requests</h1>
+
+
 
 <div class="col-12 col-md-10 offset-1 offset-1">
     <div class="text-danger" asp-validation-summary="All"></div>
+    <h3>All Requested</h3>
 
     <table style="width:100%; border:solid" class="table table-hover">
         <tr>
@@ -24,6 +25,8 @@
             <th style="border:solid; color:blue">PRICEPERDAY</th>
             <th style="border:solid; color:blue">TIME</th>
             <th style="border:solid; color:blue">STATUS</th>
+
+
         </tr>
 
         @foreach (var item in Model)
@@ -37,21 +40,60 @@
                 <th style="border:solid; color:black">@item.PricePerDay</th>
                 <th style="border:solid; color:black">@item.Time</th>
                 <th style="border:solid; color:black">
-                    <a asp-controller="Account" asp-action="MyRequests" class="hover-btn-new"><span>Request</span></a>
+                    <a asp-controller="Account" asp-action="Index" class="hover-btn-new"><span>Cancel</span></a>
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 </th>
+
+
             </tr>
         }
-        <br />       
-    </table>
+        <br />
+        
 
+    </table>
     <br />
-    @*<div class="row">
+    <br />
+    <h3>All Canceled</h3>
+    <table style="width:100%; border:solid" class="table table-hover">
+        <tr>
+            <th style="border:solid; color:blue">TRAINER</th>
+            <th style="border:solid; color:blue">EDUCATION</th>
+            <th style="border:solid; color:blue">CATEGORY</th>
+            <th style="border:solid; color:blue">TRAINERTYPE</th>
+            <th style="border:solid; color:blue">KONTENJAN</th>
+            <th style="border:solid; color:blue">PRICEPERDAY</th>
+            <th style="border:solid; color:blue">TIME</th>
+            <th style="border:solid; color:blue">STATUS</th>
+
+
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <th style="border:solid; color:black">@item.Trainer.Name <br />@item.Trainer.Surname - <br />@item.Trainer.Department</th>
+                <th style="border:solid; color:black">@item.Name</th>
+                <th style="border:solid; color:black">@item.Category.Name</th>
+                <th style="border:solid; color:black">@item.Trainer.Type</th>
+                <th style="border:solid; color:black">@item.Kontenjan</th>
+                <th style="border:solid; color:black">@item.PricePerDay</th>
+                <th style="border:solid; color:black">@item.Time</th>
+                <th style="border:solid; color:black">@item.Student.EducationRequest.IsEducationCanceled
+                </th>
+
+
+            </tr>
+        }
+        <br />
+
+
+    </table>
+    <div class="row">
         <div class="text-center">
             <ul class="pagination">
 
                 <li>
-                    <a class="page-link btn @previousDisabled" href="@Url.ActionLink("Index","Account",new{area="Student",pageindex=Model.PageIndex-1})">
+                    <a class="page-link btn @previousDisabled" href="@Url.ActionLink("MyRequests","Account",new{area="Student",pageindex=Model.PageIndex-1})">
                         &laquo;
                     </a>
                 </li>
@@ -59,14 +101,14 @@
                 @for (int i = 1; i <= Model.TotalPages; i++)
                 {
                     <li>
-                        <a class="page-link" href="@Url.ActionLink("Index","Account",new{area="Student",pageindex=i})">
+                        <a class="page-link" href="@Url.ActionLink("MyRequests","Account",new{area="Student",pageindex=i})">
                             @i
                         </a>
                     </li>
                 }
 
                 <li>
-                    <a class="page-link btn @nextDisabled" href="@Url.ActionLink("Index","Account",new{area="Student",pageindex=Model.PageIndex+1})">
+                    <a class="page-link btn @nextDisabled" href="@Url.ActionLink("MyRequests","Account",new{area="Student",pageindex=Model.PageIndex+1})">
                         &raquo;
                     </a>
                 </li>
@@ -75,7 +117,6 @@
 
 
         </div>
-    </div>*@
+    </div>
 </div>
-
 

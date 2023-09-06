@@ -13,6 +13,7 @@ namespace EducationPortalEL.ViewModels
     {
         public string CategoryId { get; set; }
         public string TrainerTypeId { get; set; }
+        public string StudentId { get; set; }
 
         [Required]
         [StringLength(50, MinimumLength = 2)]
@@ -33,6 +34,7 @@ namespace EducationPortalEL.ViewModels
         public virtual Category Category { get; set; }
 
         public virtual TrainerInfo Trainer { get; set; }
+        public virtual Student Student { get; set; }
 
     }
 }

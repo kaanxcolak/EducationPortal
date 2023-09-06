@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace EducationPortalDL.Migrations
 {
     /// <inheritdoc />
-    public partial class mig1 : Migration
+    public partial class mg1 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -262,6 +262,7 @@ namespace EducationPortalDL.Migrations
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CategoryId = table.Column<string>(type: "nvarchar(11)", nullable: false),
                     TrainerTypeId = table.Column<string>(type: "nvarchar(11)", nullable: false),
+                    StudentId = table.Column<string>(type: "nvarchar(11)", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Kontenjan = table.Column<int>(type: "int", nullable: false),
                     Time = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
@@ -275,6 +276,12 @@ namespace EducationPortalDL.Migrations
                         name: "FK_EducationInfos_Categories_CategoryId",
                         column: x => x.CategoryId,
                         principalTable: "Categories",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_EducationInfos_Students_StudentId",
+                        column: x => x.StudentId,
+                        principalTable: "Students",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
@@ -330,6 +337,11 @@ namespace EducationPortalDL.Migrations
                 column: "CategoryId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_EducationInfos_StudentId",
+                table: "EducationInfos",
+                column: "StudentId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_EducationInfos_TrainerTypeId",
                 table: "EducationInfos",
                 column: "TrainerTypeId");
@@ -365,9 +377,6 @@ namespace EducationPortalDL.Migrations
                 name: "EducationInfos");
 
             migrationBuilder.DropTable(
-                name: "Students");
-
-            migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
@@ -375,6 +384,9 @@ namespace EducationPortalDL.Migrations
 
             migrationBuilder.DropTable(
                 name: "Categories");
+
+            migrationBuilder.DropTable(
+                name: "Students");
 
             migrationBuilder.DropTable(
                 name: "TrainerInfos");

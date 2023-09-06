@@ -3,6 +3,7 @@ using EducationPortalBL.InterfacesOfManagers;
 using EducationPortalEL.Constants;
 using EducationPortalEL.IdentityModels;
 using EducationPortalEL.Models;
+using EducationPortalEL.PaginatedListModels;
 using EducationPortalEL.ViewModels;
 using EducationPortalUI.DefaultData;
 using EducationPortalUI.Models;
@@ -22,21 +23,23 @@ public class AccountController : Controller
 	private readonly RoleManager<AppRole> _roleManager;
 	private readonly SignInManager<AppUser> _signInManager;
 	private readonly IEducationInfoManager _educationInfoManager;
+	private readonly IStudentManager _studentManager;
 	private readonly IMapper _mapper;
 
 	const int keySize = 64;
 	const int iterations = 350000;
-	//HashAlgorithmName hashAlgorithm = HashAlgorithmName.SHA512;
+    //HashAlgorithmName hashAlgorithm = HashAlgorithmName.SHA512;
 
-	public AccountController(UserManager<AppUser> userManager, RoleManager<AppRole> roleManager, SignInManager<AppUser> signInManager, IEducationInfoManager educationInfoManager, IMapper mapper)
-	{
-		_userManager = userManager;
-		_roleManager = roleManager;
-		_signInManager = signInManager;
-		_educationInfoManager = educationInfoManager;
-		_mapper = mapper;
-	}
-	public IActionResult Dashboard()
+    public AccountController(UserManager<AppUser> userManager, RoleManager<AppRole> roleManager, SignInManager<AppUser> signInManager, IEducationInfoManager educationInfoManager, IMapper mapper, IStudentManager studentManager)
+    {
+        _userManager = userManager;
+        _roleManager = roleManager;
+        _signInManager = signInManager;
+        _educationInfoManager = educationInfoManager;
+        _mapper = mapper;
+        _studentManager = studentManager;
+    }
+    public IActionResult Dashboard()
 	{
 		return View();
 	}
@@ -104,13 +107,125 @@ public class AccountController : Controller
 		}
 	}
 
-	public IActionResult Index()
-	{
+    [HttpGet]
+    public IActionResult Register()
+    {
 
-		return View();
-	}
+        return View();
+    }
 
-	[HttpGet]
+    [HttpPost]
+    public IActionResult Register(RegisterViewModel model)
+    {
+        try
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            // aynı username'den varsa hata versin
+            var sameUser = _userManager.FindByNameAsync(model.Username).Result; // async bir metodun sonuna .Result yazarsak metod senkron çalışır
+            if (sameUser != null)
+            {
+                ModelState.AddModelError("", "Bu kullanıcı ismi sistemde mevcuttur! Farklı kullanıcı adı deneyiniz!");
+            }
+
+
+            sameUser = _userManager.FindByEmailAsync(model.Email).Result;
+            if (sameUser != null)
+            {
+                ModelState.AddModelError("", "Bu email ile sistemde mevcuttur! Farklı email deneyiniz!");
+            }
+
+
+            AppUser user = new AppUser()
+            {
+                UserName = model.Username,
+                Name = model.Name,
+                Surname = model.Surname,
+                TcNo = model.TcNo,
+                PhoneNumber = model.PhoneNumber,
+                Email = model.Email,
+                EmailConfirmed = true,
+            };
+
+            var result = _userManager.CreateAsync(user, model.Password).Result;
+            if (result.Succeeded)
+            {
+
+                var roleResult = _userManager.AddToRoleAsync(user, ConstantDatas.STUDENTROLE).Result;
+
+                if (roleResult.Succeeded)
+                {
+                    TempData["RegisterSuccessMsg"] = "Kayıt başarılı!";
+                }
+                else
+                {
+                    TempData["RegisterWarningMsg"] = "Kullanıcı oluştu! Ancak rolü atanamadı! Sistem yöneticisine ulaşarak rol ataması yapılmalıdır!";
+                }
+                return RedirectToAction("Login", "Account");
+            }
+            else
+            {
+                ModelState.AddModelError("", "Ekleme başarısız!");
+                foreach (var item in result.Errors)
+                {
+                    ModelState.AddModelError("", item.Description);
+
+                }
+                return View(model);
+            }
+        }
+        catch (Exception ex)
+        {
+            ModelState.AddModelError("", "Beklenmedik hata oluştu!");
+            return View(model);
+
+        }
+    }
+
+
+    public IActionResult Index()
+    {
+        return View();
+    }
+
+    [HttpGet]
+    public IActionResult Index(int pageindex = 1)
+    {
+        try
+        {
+            var data = _educationInfoManager.GetAll().Data;
+
+            var educations = PaginatedList<EducationInfoVM>.Create(data.ToList(), pageindex, 5);
+            return View(educations);
+        }
+        catch (Exception ex)
+        {
+            ModelState.AddModelError("", "Beklenmedik bir hata olustu!" + ex.Message);
+            return View(new List<EducationInfoVM>());
+        }
+    }
+
+    [HttpGet]
+    public IActionResult MyRequests(int pageindex = 1)
+    {
+        try
+        {
+            var data = _studentManager.GetAll().Data;
+
+            var students = PaginatedList<StudentVM>.Create(data.ToList(), pageindex, 5);
+            return View(students);
+        }
+        catch (Exception ex)
+        {
+            ModelState.AddModelError("", "Beklenmedik bir hata olustu!" + ex.Message);
+            return View(new List<StudentVM>());
+        }
+    }
+
+    [HttpGet]
 	public IActionResult EducationInfo()
 	{
 		return View();
@@ -196,96 +311,14 @@ public class AccountController : Controller
 
 
 
-	[HttpGet]
-	public IActionResult Register()
-	{
+	
 
-		return View();
-	}
-
-	[HttpPost]
-	public IActionResult Register(RegisterViewModel model)
-	{
-		try
-		{
-			if (!ModelState.IsValid)
-			{
-				return View(model);
-			}
-
-			// aynı username'den varsa hata versin
-			var sameUser = _userManager.FindByNameAsync(model.Username).Result; // async bir metodun sonuna .Result yazarsak metod senkron çalışır
-			if (sameUser != null)
-			{
-				ModelState.AddModelError("", "Bu kullanıcı ismi sistemde mevcuttur! Farklı kullanıcı adı deneyiniz!");
-			}
-
-
-			sameUser = _userManager.FindByEmailAsync(model.Email).Result;
-			if (sameUser != null)
-			{
-				ModelState.AddModelError("", "Bu email ile sistemde mevcuttur! Farklı email deneyiniz!");
-			}
-
-
-			AppUser user = new AppUser()
-			{
-				UserName = model.Username,
-				Name = model.Name,
-				Surname = model.Surname,
-				TcNo = model.TcNo,
-				PhoneNumber = model.PhoneNumber,
-				Email = model.Email,
-				EmailConfirmed = true,
-			};
-
-			var result = _userManager.CreateAsync(user, model.Password).Result;
-			if (result.Succeeded)
-			{
-
-				var roleResult = _userManager.AddToRoleAsync(user, ConstantDatas.STUDENTROLE).Result;
-
-				if (roleResult.Succeeded)
-				{
-					TempData["RegisterSuccessMsg"] = "Kayıt başarılı!";
-				}
-				else
-				{
-					TempData["RegisterWarningMsg"] = "Kullanıcı oluştu! Ancak rolü atanamadı! Sistem yöneticisine ulaşarak rol ataması yapılmalıdır!";
-				}
-				return RedirectToAction("Login", "Account");
-			}
-			else
-			{
-				ModelState.AddModelError("", "Ekleme başarısız!");
-				foreach (var item in result.Errors)
-				{
-					ModelState.AddModelError("", item.Description);
-
-				}
-				return View(model);
-			}
-		}
-		catch (Exception ex)
-		{
-			ModelState.AddModelError("", "Beklenmedik hata oluştu!");
-			return View(model);
-
-		}
-	}
-
-
-
-	//public IActionResult NewEducationAdd()
-	//{
-	//    try
-	//    {
-
-	//    }
-	//    catch (Exception ex)
-	//    {
-	//        ViewBag.
-	//    }
-	//}
+    [Authorize]
+    public IActionResult Logout()
+    {
+        _signInManager.SignOutAsync();
+        TempData["LoggedInNameSurname"] = null;
+        return RedirectToAction("Login", "Account");
+    }
 
 }
