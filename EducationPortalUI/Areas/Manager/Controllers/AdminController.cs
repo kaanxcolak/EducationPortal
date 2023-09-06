@@ -17,6 +17,7 @@ namespace EducationPortalUI.Areas.Manager.Controllers
 {
     [Area("Manager")]
     [Route("admin/[Action]/{id?}")]
+    [Authorize(Roles = "Student", AuthenticationSchemes = AuthenticationSchemes.StudentArea)]
     public class AdminController:Controller
     {
         private readonly UserManager<AppUser> _userManager;      
