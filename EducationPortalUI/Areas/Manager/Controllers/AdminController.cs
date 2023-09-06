@@ -192,13 +192,13 @@ namespace EducationPortalUI.Areas.Manager.Controllers
 
 
         [HttpGet]
-        public IActionResult CreateEducationInfo()
+        public IActionResult EducationInfo()
         {
             return View();
         }
         
         [HttpPost]
-        public IActionResult CreateEducationInfo(EducationInfoVM model)
+        public IActionResult EducationInfo(EducationInfoVM model)
         {
             try
             {
@@ -255,8 +255,8 @@ namespace EducationPortalUI.Areas.Manager.Controllers
 
                 if (_educationInfoManager.Add(_mapper.Map<EducationInfoVM>(educationInfo)).IsSuccess)
                 {
-                    TempData["CreateEducationInfoSuccessMsg"] = "Kayıt başarılı!";
-                    return RedirectToAction("CreateEducationInfo", "Admin");
+                    TempData["EducationInfoSuccessMsg"] = "Kayıt başarılı!";
+                    return RedirectToAction("EducationInfo", "Admin");
 
                 }
                 else
