@@ -1,3 +1,3 @@
 # EducationPortal
 
-##Technical project prepared for Yaz Information Systems company.
+## Technical project prepared for Yaz Information Systems company.
