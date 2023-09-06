@@ -2,7 +2,7 @@
 <html lang="tr">
 
 <head>
-	<title>Student Portal</title>
+	<title>Education Panel</title>
 	<!-- HTML5 Shim and Respond.js IE11 support of HTML5 elements and media queries -->
 	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 	<!--[if lt IE 11]>
@@ -33,13 +33,14 @@
 		</div>
 	</div>
 	<!-- [ Pre-loader ] End -->
-	@await Component.InvokeAsync("BranchSideBarMenu")
+	@await Component.InvokeAsync("StudentSideBarMenu")
+
 
 
 	<!-- !!!!!!!!!!!!!-->
 	<!-- [ Header ] start  BURAYI KESİP TOPMENU YAPİCAZ AWAIT EKLEYECEZ-->
-	@await Component.InvokeAsync("TopBarMenu")
-	
+	@await Component.InvokeAsync("StudentTopBarMenu")
+
 	<!-- [ Main Content ] start -->
 	<div class="pcoded-main-container">
 		<div class="pcoded-content">
@@ -69,7 +70,6 @@
 		</div>
 	</div>
 	<!-- [ Main Content ] end -->
-
 	<!-- Required Js -->
 	<script src="~/admintheme/assets/js/vendor-all.min.js"></script>
 	<script src="~/admintheme/assets/js/plugins/bootstrap.min.js"></script>

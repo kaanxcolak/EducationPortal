@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace EducationPortalDL.Migrations
 {
     /// <inheritdoc />
-    public partial class portal : Migration
+    public partial class mig1 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -57,8 +57,7 @@ namespace EducationPortalDL.Migrations
                 name: "Categories",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<string>(type: "nvarchar(11)", maxLength: 11, nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Description = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
@@ -113,7 +112,7 @@ namespace EducationPortalDL.Migrations
                     Phone = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false),
                     TcNo = table.Column<string>(type: "nvarchar(11)", maxLength: 11, nullable: false),
                     Email = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    Age = table.Column<int>(type: "int", maxLength: 2, nullable: false),
+                    Age = table.Column<int>(type: "int", nullable: false),
                     Department = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Type = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     IsRemoved = table.Column<bool>(type: "bit", nullable: false)
@@ -240,7 +239,7 @@ namespace EducationPortalDL.Migrations
                     Phone = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false),
                     TcNo = table.Column<string>(type: "nvarchar(11)", maxLength: 11, nullable: false),
                     Email = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    Age = table.Column<int>(type: "int", maxLength: 2, nullable: false),
+                    Age = table.Column<int>(type: "int", nullable: false),
                     EducationRequestId = table.Column<string>(type: "nvarchar(11)", nullable: false),
                     IsRemoved = table.Column<bool>(type: "bit", nullable: false)
                 },
@@ -259,15 +258,14 @@ namespace EducationPortalDL.Migrations
                 name: "EducationInfos",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<string>(type: "nvarchar(11)", maxLength: 11, nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CategoryId = table.Column<int>(type: "int", nullable: false),
+                    CategoryId = table.Column<string>(type: "nvarchar(11)", nullable: false),
                     TrainerTypeId = table.Column<string>(type: "nvarchar(11)", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    Kontenjan = table.Column<int>(type: "int", maxLength: 5, nullable: false),
+                    Kontenjan = table.Column<int>(type: "int", nullable: false),
                     Time = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    PricePerDay = table.Column<decimal>(type: "decimal(18,2)", maxLength: 50, nullable: false),
+                    PricePerDay = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     IsRemoved = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>

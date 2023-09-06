@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace EducationPortalEL.Models
 {
     [Table("Categories")]
-    public class Category:BaseNumeric
+    public class Category:BaseNonNumeric
     {       
         [Required]
         [StringLength(50, MinimumLength = 2)]

@@ -1,13 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace EducationPortalUI.Components
-{
-    public class TopMenuViewComponent:ViewComponent
-    {
+namespace EducationPortalUI.Areas.Student.Components;
 
+    public class StudentTopBarMenuViewComponent:ViewComponent
+    {
         public IViewComponentResult Invoke()
         {
             return View();
         }
     }
-}
+

@@ -31,7 +31,6 @@ namespace EducationPortalEL.ViewModels
         public string Email { get; set; }
 
         [Required]
-        [StringLength(2, MinimumLength = 2)]
         public int Age { get; set; }
 
         [Required]

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace EducationPortalEL.ViewModels
 {
-    public class CategoryVM: BaseNumericVM
+    public class CategoryVM: BaseNonNumericVM
     {
         public string Name { get; set; } //online, sınıf içi eğitim, kitap, makale, sunum, mini proje...
         public string Description { get; set; }

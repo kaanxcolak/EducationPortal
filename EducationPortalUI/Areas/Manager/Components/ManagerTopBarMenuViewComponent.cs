@@ -2,7 +2,7 @@
 
 namespace EducationPortalUI.Areas.Manager.Components;
 
-    public class TopBarMenuViewComponent:ViewComponent
+    public class ManagerTopBarMenuViewComponent:ViewComponent
     {
         public IViewComponentResult Invoke()
         {

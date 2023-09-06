@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EducationPortalDL.Migrations
 {
     [DbContext(typeof(MyContext))]
-    [Migration("20230905135249_portal")]
-    partial class portal
+    [Migration("20230905225021_mig1")]
+    partial class mig1
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -138,12 +138,10 @@ namespace EducationPortalDL.Migrations
 
             modelBuilder.Entity("EducationPortalEL.Models.Category", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
+                    b.Property<string>("Id")
+                        .HasMaxLength(11)
+                        .HasColumnType("nvarchar(11)")
                         .HasColumnOrder(1);
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2")
@@ -172,15 +170,14 @@ namespace EducationPortalDL.Migrations
 
             modelBuilder.Entity("EducationPortalEL.Models.EducationInfo", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
+                    b.Property<string>("Id")
+                        .HasMaxLength(11)
+                        .HasColumnType("nvarchar(11)")
                         .HasColumnOrder(1);
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("CategoryId")
-                        .HasColumnType("int");
+                    b.Property<string>("CategoryId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(11)");
 
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2")
@@ -190,7 +187,6 @@ namespace EducationPortalDL.Migrations
                         .HasColumnType("bit");
 
                     b.Property<int>("Kontenjan")
-                        .HasMaxLength(5)
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
@@ -199,7 +195,6 @@ namespace EducationPortalDL.Migrations
                         .HasColumnType("nvarchar(50)");
 
                     b.Property<decimal>("PricePerDay")
-                        .HasMaxLength(50)
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("Time")
@@ -288,7 +283,6 @@ namespace EducationPortalDL.Migrations
                         .HasColumnOrder(1);
 
                     b.Property<int>("Age")
-                        .HasMaxLength(2)
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedDate")
@@ -342,7 +336,6 @@ namespace EducationPortalDL.Migrations
                         .HasColumnOrder(1);
 
                     b.Property<int>("Age")
-                        .HasMaxLength(2)
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedDate")

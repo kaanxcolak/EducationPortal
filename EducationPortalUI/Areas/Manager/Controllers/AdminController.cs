@@ -3,6 +3,7 @@ using EducationPortalBL.InterfacesOfManagers;
 using EducationPortalEL.Constants;
 using EducationPortalEL.IdentityModels;
 using EducationPortalEL.Models;
+using EducationPortalEL.PaginatedListModels;
 using EducationPortalEL.ViewModels;
 using EducationPortalUI.DefaultData;
 using EducationPortalUI.Models;
@@ -192,6 +193,26 @@ namespace EducationPortalUI.Areas.Manager.Controllers
 
         }
 
+        [HttpGet]
+        public IActionResult AllEducations(int pageindex=1)
+        {
+            try
+            {
+                var data = _educationInfoManager.GetAll().Data;
+                
+
+                var educations = PaginatedList<EducationInfoVM>.Create(data.ToList(), pageindex, 5);
+                return View(educations);
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("", "Beklenmedik bir hata olustu!" + ex.Message);
+                return View(new List<EducationInfoVM>());
+
+            }
+
+
+        }
 
 
 

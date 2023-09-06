@@ -32,7 +32,6 @@ namespace EducationPortalEL.Models
         public string Email { get; set; }
 
         [Required]
-        [StringLength(2, MinimumLength = 1)]
         public int Age { get; set; }
 
         public string EducationRequestId { get; set; }

@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 namespace EducationPortalEL.Models
 {
     [Table("EducationInfos")]
-    public class EducationInfo: BaseNumeric
+    public class EducationInfo: BaseNonNumeric
     {
-        public int CategoryId { get; set; }
+        public string CategoryId { get; set; }
         public string TrainerTypeId { get; set; }       
 
         [Required]
@@ -19,7 +19,6 @@ namespace EducationPortalEL.Models
         public string Name { get; set; }
 
         [Required]
-        [StringLength(5, MinimumLength = 1)]
         public int Kontenjan { get; set; }
 
         [Required]
@@ -27,7 +26,6 @@ namespace EducationPortalEL.Models
         public string Time { get; set; }
 
         [Required]
-        [StringLength(50, MinimumLength = 1)]
         public decimal PricePerDay { get; set; }
 
         [ForeignKey("CategoryId")]
